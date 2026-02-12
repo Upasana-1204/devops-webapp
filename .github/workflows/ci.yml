@@ -18,3 +18,10 @@ jobs:
 
       - name: List Files
         run: ls -la
+
+      - name: Send Slack Notification
+        if: always()
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text":"GitHub Action Build Completed for DevOps WebApp"}' \
+          ${{ secrets.SLACK_WEBHOOK }}
